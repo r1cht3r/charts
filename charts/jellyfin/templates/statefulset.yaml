@@ -68,7 +68,7 @@ spec:
             - name: tmpfs
               mountPath: /tmp
             {{- range .Values.jellyfin.extraDevices }}
-            - name: {{ . | trimAll "/" | replace "/" "-" | lower }}
+            - name: {{ . | trimAll "/" | replace "/" "-" | replace "_" "-" | lower }}
               mountPath: {{ . }}
             {{- end }}
             {{- range .Values.jellyfin.mediaVolumes }}
@@ -117,7 +117,7 @@ spec:
             medium: Memory
             sizeLimit: 10Mi
         {{- range .Values.jellyfin.extraDevices }}
-        - name: {{ . | trimAll "/" | replace "/" "-" | lower }}
+        - name: {{ . | trimAll "/" | replace "/" "-" | replace "_" "-" | lower }}
           hostPath:
             path: {{ . }}
         {{- end }}
